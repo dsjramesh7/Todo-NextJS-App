@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Providers } from "@/redux/Providers";
 
 export const metadata: Metadata = {
   title: "TODO APP",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased vsc-initialized`}>{children}</body>
+      <body className={`antialiased vsc-initialized`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
