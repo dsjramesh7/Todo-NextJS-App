@@ -2,6 +2,8 @@
 import { deleteTodo } from "@/redux/features/taskSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import React from "react";
+import Modal from "../UI/Modal";
+import Button from "../UI/Button";
 
 const TaskListArea = () => {
   const dispatch = useAppDispatch();
@@ -25,10 +27,14 @@ const TaskListArea = () => {
                   <h2>{task.taskName}</h2>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={() => handleDeleteTodo(task.id)}>
+                  <Button
+                    variant="danger"
+                    color="danger"
+                    onClick={() => handleDeleteTodo(task.id)}
+                  >
                     delete
-                  </button>
-                  <button>edit</button>
+                  </Button>
+                  <Modal id={task.id} />
                 </div>
               </div>
             );

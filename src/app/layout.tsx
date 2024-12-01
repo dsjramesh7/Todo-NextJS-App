@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "@radix-ui/themes/styles.css";
 import { Providers } from "@/redux/Providers";
+import { Theme } from "@radix-ui/themes";
 
 export const metadata: Metadata = {
   title: "TODO APP",
@@ -15,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased vsc-initialized`}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Theme>{children}</Theme>
+        </Providers>
       </body>
     </html>
   );
