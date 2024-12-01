@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// Define the TodoTypes interface
+// Defining the TodoTypes interface
 interface TodoTypes {
   id: string;
   taskName: string;
@@ -33,17 +33,27 @@ const taskSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; taskName: string }>
     ) => {
-      const { id, taskName } = action.payload;
-      const taskIndex = state.findIndex((task) => task.id === id);
+      const taskIndex = state.findIndex(
+        (task) => task.id === action.payload.id
+      );
       if (taskIndex !== -1) {
-        state[taskIndex].taskName = taskName;
+        state[taskIndex].taskName = action.payload.taskName;
+      }
+    },
+
+    //reducer or function for toggle of task complete or not
+    toggleTodo: (state, action: PayloadAction<string>) => {
+      const task = state.find((task) => task.id === action.payload);
+      // console.log("id:", task?.completed);
+      if (task) {
+        task.completed = !task.completed;
       }
     },
   },
 });
 
 // Export the reducer functions as actions
-export const { addTodo, deleteTodo, editTodo } = taskSlice.actions;
+export const { addTodo, deleteTodo, editTodo, toggleTodo } = taskSlice.actions;
 
 // Export the reducer
 export default taskSlice.reducer;
